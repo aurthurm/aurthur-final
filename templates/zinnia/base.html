@@ -30,7 +30,7 @@
 
 {% block main_navigation %}
 	<li class="nav-item">
-		<a class="" href="/#page-top">
+		<a class="page-scroll scroll-effect" href="{% if is_home %}#page-top{% else %}{% url 'home:home' %}#page-top{% endif %}">
 			<h5 class="brand text-yellow">Aurthur Musendame</h5>
 		</a>
 	</li>

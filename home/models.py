@@ -3,6 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 from ckeditor.fields import RichTextField
 from showcase.settings import SHOWCASE_UPLOAD_TO
 from django.utils import timezone
+import os
+from django.template.defaultfilters import slugify
 
 class ServicesEntry(models.Model):
 	title = models.CharField(
@@ -10,23 +12,32 @@ class ServicesEntry(models.Model):
 
 	content = RichTextField()
 
+	def __str__(self):
+		return self.title
+
 class Subject(models.Model):
 	title = models.CharField(
 			_('Subjet Title'), max_length=255)	
 
+	def __str__(self):
+		return self.title
+
 class TeachingEntry(models.Model):
-	subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+	subject = models.ForeignKey(Subject, related_name='lesson_subject' ,on_delete=models.CASCADE)
 
 	title = models.CharField(
-			_('Teaching Title'), max_length=255)
+			_('Teaching Title'), max_length=255, blank=True)
 
 	content = RichTextField()
 
 	tag = models.CharField(
-			_('tag'), max_length=255)
+			_('tag'), max_length=255, blank=True)
 
 	category = models.CharField(
-			_('category'), max_length=255)
+			_('category'), max_length=255, blank=True)
+
+	def __str__(self):
+		return self.title
 
 
 def image_upload_to_dispatcher(entry, filename):
@@ -53,6 +64,9 @@ class TechTools(models.Model):
 		upload_to=image_upload_to_dispatcher,
 		help_text=_('Used for illustration.'))
 
+	def __str__(self):
+		return self.title
+
 class HomePageHeadings(models.Model):
 	services_title = models.CharField(
 			_('Services Title'), max_length=255)
@@ -62,3 +76,6 @@ class HomePageHeadings(models.Model):
 
 	technologies_title = models.CharField(
 			_('Technologies Title'), max_length=255)
+
+	def __str__(self):
+		return str("Home Page Titles")

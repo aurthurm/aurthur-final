@@ -27,7 +27,98 @@
 {% block service_menu %}<div id="services"></div>{% endblock service_menu %}
 
 
+{% block content %}
+	<section id="sec" class="p-5">
+		<div class="container">	
+			<h2 class="text-center mb-5">{{ headings.services_title }}</h2>
+			<div class="card-deck">
+				{% for service in services %}
+				<div class="card border-light text-center">
+				  <div class="card-body">
+				    <h5 class="card-title uppercase text-bold">{{ service.title }}</h5>
+				 	<hr>
+				    <p class="card-text">{{ service.content|safe }}</p>
+				  </div>
+				</div>
+				{% empty %}
+					<p class="lead">You have no serviced added yet</p>
+				{% endfor %}
 
+			</div>
+		</div>				
+	</section>
+
+	<section id="teaching" class="one-on-one mt-5 bg-gray p-5">
+		<div class="container">
+			<div class="card card-one-on-one text-center p-5">
+				<header class="card-header">
+					<div class="card-title">
+						<h2 class="mb-5">{{ headings.teaching_title }}</h2>
+					</div>
+				</header>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-1"></div>
+						  <div class="col-3">
+						    <div class="list-group" id="list-tab" role="tablist">
+
+							    {% for subject in subjects %}
+							      <a class="list-group-item list-group-item-action {% if subject.title == subjects.first.title %}active{% endif %}" id="list-{{ subject.title }}-list" data-toggle="list" href="#list-{{ subject.title }}" role="tab" aria-controls="{{ subject.title }}">{{ subject.title }}</a>
+							    {% empty %}
+							    	<p class="lead text-muted"> No Subjects Yet</p>
+							    {% endfor %}
+
+						    </div>
+						  </div>
+						  <div class="col-7">
+						    <div class="tab-content" id="nav-tabContent">
+						        {% for subject in subjects %}
+							        <div class="tab-pane fade show {% if subject.title == subjects.first.title %}active{% endif %}" id="list-{{ subject.title }}" role="tabpanel" aria-labelledby="list-{{ subject.title }}-list">
+										<div class="list-group">
+										  {% for lesson in subject.lesson_subject.all %}
+										  <div href="#" class="list-group-item">
+										    <div class="d-flex w-100 justify-content-between">
+										      <h5 class="mb-1">{{ lesson.title }}</h5>
+										      <small>{{ lesson.tag }}</small>
+										    </div>
+										    <p class="mb-1">{{ lesson.content|safe }}</p>
+										    <small>&#126; {{ lesson.category }} &#126;</small>
+										  </div>
+										  {% endfor %}
+										</div>
+							        </div>
+						        {% endfor %}
+						    </div>
+						  </div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<section class="tech-tools mid-spacer">
+		<div class="container">
+			<div class="card card-tools text-center bb-none">
+				<div class="card-body">
+					<div class="card-title text-black mb-5">
+						<h2>{{ headings.technologies_title }}</h2>
+					</div>
+					<div class="card-text">
+						<ul class="list-inline">
+							{% for tech in technologies %}
+								<li class="list-inline-item tech-tool">
+									<img src="{{ tech.image.url }}" alt="" class="img-fluid">
+								</li>
+							{% empty %}
+								<p class="lead">Start adding some technologies</p>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
 
 
 {% block site_footer_id %}contact{% endblock site_footer_id %}
