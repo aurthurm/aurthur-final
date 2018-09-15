@@ -1,0 +1,105 @@
+{% extends "zinnia/skeleton.html" %}
+{% load i18n %}
+{% load zinnia %}
+{% load static %}
+
+{% block meta-keywords %}{% get_tags as entry_tags %}{{ entry_tags|join:", "}}{% endblock meta-keywords %}
+
+{% block meta %}
+    <meta name="generator" content="Zinnia {{ ZINNIA_VERSION }}" />
+{% endblock meta %}
+
+{% block link %}
+    <link rel="index" href="{% url 'zinnia:entry_archive_index' %}" />
+    <link rel="author" type="text/plain" href="{% url 'zinnia:humans' %}" />
+    <link rel="EditURI" type="application/rsd+xml" href="{% url 'zinnia:rsd' %}" />
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url 'zinnia:wlwmanifest' %}" />
+    <link rel="search" type="application/opensearchdescription+xml" title="Zinnia's Weblog" href="{% url 'zinnia:opensearch' %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS feed of last entries" %}" href="{% url 'zinnia:entry_feed' %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS feed of last discussions" %}" href="{% url 'zinnia:discussion_feed' %}" />
+	<link rel="stylesheet" href="{% static 'aurthur/fonts/fontawesome/css/fa-svg-with-js.css' %}">
+	<link rel="stylesheet" href="{% static 'aurthur/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'aurthur/css/main.css' %}">
+    {% get_archives_entries "zinnia/tags/entries_archives_link.html" %}
+{% endblock link %}
+
+{% block head_script %}
+	<script src="{% static 'aurthur/js/typed.min.js' %}"></script>
+	<script src="{% static 'aurthur/fonts/fontawesome/js/fontawesome-all.js' %}"></script>
+{% endblock head_script %}
+
+{% block main_navigation %}
+	<li class="nav-item">
+		<a class="" href="/#page-top">
+			<h5 class="brand text-yellow">Aurthur Musendame</h5>
+		</a>
+	</li>
+	<li class="nav-item hidden">
+		<a class="nav-link" href="#">hidden</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link {% block blog_class %}{% endblock blog_class %}" href="/blog">Blog</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link {% block portfolio_class %}{% endblock portfolio_class %}" href="{% url 'showcase:portfolio-listing' %}">Portfolio</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link page-scroll scroll-effect" href="{% if is_home %}#services{% else %}{% url 'home:home' %}#services{% endif %}">Services</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link page-scroll scroll-effect" href="{% if is_home %}#teaching{% else %}{% url 'home:home' %}#teaching{% endif %}">Teaching</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link page-scroll scroll-effect" href="{% if is_home %}#contact{% else %}{% url 'home:home' %}#contact{% endif %}">Contact</a>
+	</li>
+
+{% endblock main_navigation %}
+
+{% block main_header %}
+{% endblock main_header %}
+
+{% block content %}
+{% endblock content %}
+
+{% block site_footer %}
+	<div class="container text-center mt-5">
+		<h1 id="{% block site_footer_id %}{% endblock site_footer_id %}">Work With Me</h1>
+		<hr>
+		<nav class="navbar social-nav">
+			<ul class="nav d-flex justify-content-center">
+				<li class="">
+					<a class="nav-link fa-icon" href="mailto:aurthurmusendame@gmail.com">
+						<i class="far fa-envelope"></i>
+					</a>
+				</li>
+				<li class="">
+					<a class="nav-link fa-icon" href="https://twitter.com/aurthurmusendam" target="_blank">
+						<i class="fab fa-twitter"></i>
+					</a>
+				</li>
+				<li class="">
+					<a class="nav-link text-white" href="https://www.facebook.com/amuselytica" target="_blank">AmuseLytics</a>
+				</li>
+				<li class="">
+					<a class="nav-link fa-icon" href="https://www.facebook.com/aurthurmusendame" target="_blank">
+						<i class="fab fa-facebook"></i>
+					</a>
+				</li>
+				<li class="">
+					<a class="nav-link fa-icon" href="https://github.com/aurthurm" target="_blank">
+						<i class="fab fa-github"></i>
+					</a>
+				</li>
+			</ul>		    
+		</nav>
+	</div>
+{% endblock site_footer %}
+
+{% block scripts %}
+	<script src="{% static 'aurthur/js/jquery.min.js' %}"></script>
+	<script src="{% static 'aurthur/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'aurthur/js/jquery.easing.min.js' %}"></script>
+	<script src="{% static 'aurthur/js/particles.min.js' %}"></script>
+	<script src="{% static 'aurthur/js/particle-config.js' %}"></script>
+	<script src="{% static 'aurthur/js/main.js' %}"></script>
+{% endblock scripts %}

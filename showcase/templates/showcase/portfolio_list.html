@@ -1,0 +1,42 @@
+{% extends 'zinnia/base.html' %}
+
+{% block main_header %}
+	<h1 class="heading mb-5">The <span class="text-yellow">work</span> of my hands</h1>
+
+	<div class="inner text-center mb-5">
+		<p class="text-yellow ">DJANGO | SPC | API</p>
+	</div>
+
+	<hr>
+	<div id="typed-strings">
+		<p>I have worked hard on these projects.^3000 If you want my help <a href="/#contact" class="btn btn-lg btn-success">lets talk</a> ^5000</p>
+	</div>
+	<span id="typed" class=" micro-spacer"></span>
+{% endblock main_header %}
+
+{% block content %}
+<div class="container">
+
+	<section class="row portfolio pieces">
+
+		{% for piece in portfolios %}
+
+			<article class="card mb-4 col-md-6 piece">
+				<header class="card-header text-center">
+					<a href="{{ piece.get_absolute_url }}">
+						<h4 class="card-title">{{ piece.title }}</h4>
+					</a>
+				</header>
+				<a href="{{ piece.get_absolute_url }}">
+					<img src="{{ piece.image.url }}" alt="{{ piece.title }}" class="card-img">
+				</a>
+			</article>
+
+		{% empty %}
+			<p class="lead">Your Portfolio is empty</p>
+		{% endfor %}
+
+	</section>
+
+</div>
+{% endblock content %}

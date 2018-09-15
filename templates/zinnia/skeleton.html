@@ -1,0 +1,61 @@
+{% load i18n %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %}{% block title-page %}{% endblock title-page %} | Aurthur Musendame</title> 
+    <meta name="robots" content="follow, all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{% block meta-description %}{% trans "Just another Zinnia weblog." %}{% endblock meta-description %}{% block meta-description-page %}{% endblock meta-description-page %}" />
+    <meta name="keywords" content="{% block meta-keywords %}django, blog, weblog, zinnia{% endblock meta-keywords %}" />
+    <meta name="author" content="Fantomas42" />
+    {% block meta %}{% endblock meta %}
+    <link rel="pingback" href="/xmlrpc/" />
+    <link rel="shortcut icon" href="{% static "zinnia/theme/img/favicon.ico" %}" />
+    <link rel="home" href="{% url 'zinnia:entry_archive_index' %}" />
+    <link rel="stylesheet" type="text/css" media="screen, projection" href="{% static "zinnia/theme/css/screen.css" %}" />
+    <link rel="stylesheet" type="text/css" media="print" href="{% static "zinnia/theme/css/print.css" %}" />
+    <!--[if lt IE 8]>
+        <link rel="stylesheet" type="text/css" media="screen, projection" href="{% static "zinnia/theme/css/ie.css" %}" />
+    <![endif]-->
+    {% block link %}{% endblock link %}
+    {% block head_script %}{% endblock head_script %}
+  </head>
+  <body id="page-top">  
+
+    <header id="particles-js" class="main-header">
+
+    </header>
+
+    <div class="particles-overlay">
+        <nav class="navbar navbar-default navbar-expand-lg navbar-dark fixed-top bg-black">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+                <ul class="navbar-nav uppercase">
+                    {% block main_navigation %}{% endblock main_navigation %}
+                </ul>
+            </div>
+        </nav>
+        <div class="text-center spacer text-white">
+            {% block main_header %}{% endblock main_header %}
+        </div>
+        <!-- placed the services id in this place for scroll to position page correctly
+         otherwise it should be in the top section "sec" below -->
+         {% block service_menu %}{% endblock service_menu %}
+    </div>
+
+    <main class="wrapper w-100 bg-white mid-spacer">
+        {% block content %}{% endblock content %}
+    </main>
+
+    <footer class="footer text-white">
+        {% block site_footer %}{% endblock site_footer %}
+    </footer>
+
+    <!-- Scripts Files -->
+    {% block scripts %}{% endblock scripts %}
+  </body>
+</html>

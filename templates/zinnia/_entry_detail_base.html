@@ -1,0 +1,86 @@
+{% load i18n %}
+{% load zinnia %}
+{% load static %}
+
+<article id="entry-{{ object.pk }}" class="card mb-4 hentry{% if object.featured %} featured{% endif %}" itemscope itemtype="http://schema.org/Article">
+    {% block entry-header %} 
+        <header class="card-header text-center">
+            <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark" itemprop="url">            
+                {% block entry-title %}
+                    <h4 class="card-title">{{ object.title|widont }}</h4>
+                {% endblock entry-title %}
+                {% block entry-info %}
+                    <span class="card-meta">
+                        {% block entry-published %}
+                            <a href="">
+                                <time datetime="{{ object.publication_date|date:"c" }}" itemprop="datePublished">{{ object.publication_date|date:"DATE_FORMAT" }}</time>
+                            </a>
+                        {% endblock entry-published %}
+                        {% block entry-categories %}
+                            {% with categories=object.categories.all %}
+                            {% if categories|length %}
+                            {% trans "in" context "in categories" %}
+                            {% for category in categories %}
+                            <a href="{{ category.get_absolute_url }}"
+                            title="{% blocktrans %}Show all entries in {{ category }}{% endblocktrans %}"
+                            rel="tag category" itemprop="articleSection">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}.
+                            {% endwith %}
+                        {% endblock entry-categories %}
+                    </span>
+                {% endblock entry-info %}
+            </a>
+            {% block entry-creation-date %}
+                <meta itemprop="dateCreated" content="{{ object.creation_date|date:"c" }}" />
+            {% endblock entry-creation-date %}
+        </header>
+    {% endblock entry-header %}
+
+    {% block entry-image %}
+        {% if object.image %}
+            <div class="entry-image">
+              {% if continue_reading %}
+              <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
+                {% endif %}
+                    <img src="{{ object.image.url }}" alt="" class="card-img effect-a" alt="{{ object.image_caption|default:object.title }}" itemprop="contentUrl">
+                {% if continue_reading %}
+              </a>
+              {% endif %}
+            </div>
+        {% else %}        
+            <div class="entry-image">
+              {% if continue_reading %}
+              <a href="{% static 'aurthur/img/aurthur-charts.jpg' %}" title="" rel="bookmark">
+                {% endif %}
+                    <img src="{% static 'aurthur/img/aurthur-charts.jpg' %}" alt="" class="card-img effect-a" alt="">
+                {% if continue_reading %}
+              </a>
+              {% endif %}
+            </div>
+        {% endif %}
+    {% endblock entry-image %}
+
+    {% block entry-body %} 
+        <div class="card-body"> 
+            {% block entry-word-count %}
+                <meta itemprop="wordCount" content="{{ object.word_count }}" />
+            {% endblock entry-word-count %}       
+            {% block entry-lead %}
+                {% if not continue_reading and object.lead %}
+                <div class="card-text" itemprop="headline">
+                  {{ object.html_lead|safe }}
+                </div>
+                {% endif %}
+            {% endblock entry-lead %}
+            {% block entry-content %}
+                <div class="card-text" itemprop="articleBody">
+                  {{ object_content|safe }}
+                </div>
+            {% endblock entry-content %}
+        </div>
+    {% endblock entry-body %}
+
+  {% block entry-footer %}{% endblock entry-footer %}
+</article>
+
+
+

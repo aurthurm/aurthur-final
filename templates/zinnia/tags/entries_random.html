@@ -1,0 +1,26 @@
+{% load i18n %}
+{% load static %}
+
+{% for entry in entries %}
+	<li class="d-inline-block mb-2">
+		<a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">
+			<h4 class="h6">{{ entry.title }}</h4>
+			{% block entry-image %}
+			    {% if entry.image %}
+			        <img src="{{ entry.image.url }}" alt="" class="card-img effect-a" alt="{{ entry.image_caption|default:entry.title }}" itemprop="contentUrl">
+			    {% else %}     
+			        <img src="{% static 'aurthur/img/aurthur-charts.jpg' %}" alt="" class="card-img effect-a" alt="">
+			    {% endif %}
+			{% endblock entry-image %}
+		</a>
+	</li>
+{% empty %}
+	<li>
+		{% trans "No entries yet." %}
+	</li>
+{% endfor %}
+
+
+
+
+

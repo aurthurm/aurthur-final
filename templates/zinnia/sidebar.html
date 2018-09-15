@@ -1,0 +1,42 @@
+{% load i18n %}
+{% load zinnia %}
+{% load static %}
+
+<div class="card card-about mb-4">
+  <div class="card-body text-center">
+    <h4 class="card-title uppercase">{% trans "About!" %}</h4>
+    <div class="avatar">
+      <img class="rounded-circle header-avatar" src="{% static 'aurthur/img/avatar-b.jpg' %}" alt="">
+    </div>
+    <div class="card-text">
+      {% trans "Aurthur is a statistician, a datascientist from zimbabwe with a significant background n statistics and operations research" %}
+    </div>
+  </div>
+</div>
+
+<div class="card card-tags mb-4">
+  <div class="card-body">
+    <h4 class="card-title uppercase">{% trans "Categories" %}</h4>
+    <div class="card-text uppercase">
+      {% get_categories %}
+    </div>
+  </div>
+</div>
+
+<div class="card card-popular-stories mb-4">
+  <div class="card-body">
+    <h4 class="card-title">Popular Stories</h4>
+    <div class="card-text">
+      {% get_random_entries %}
+    </div>
+  </div>
+</div>
+
+<div class="card card-tags mb-4">
+  <div class="card-body">
+    <h4 class="card-title uppercase">{% trans "Tags" %}</h4>
+    <div class="card-text uppercase">
+      {% get_tag_cloud %}
+    </div>
+  </div>
+</div>

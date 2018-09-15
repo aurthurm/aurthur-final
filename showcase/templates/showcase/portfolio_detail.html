@@ -1,0 +1,48 @@
+{% extends 'zinnia/base.html' %}
+
+{% block main_header %}
+	<h1 class="heading mb-5 mt-5">{{ portfolio.title }}</h1>
+{% endblock main_header %}
+
+{% block content %}
+	<div class="container">
+
+		<section class="row portfolio piece">
+
+			<article class="card mb-4 col-md-12">
+				<div class="row">
+					<div class="col-md-6 piece-image">
+						<a href="">
+							<img src="{{ portfolio.image.url }}" alt="" class="card-img">
+						</a>
+						<hr>
+						<nav class="navbar piece-nav">
+							<ul class="nav d-flex justify-content-center">
+								<li class="">
+									<a class="nav-link fa-icon" href="mailto:aurthurmusendame@gmail.com">
+										<i class="far fa-envelope"></i>
+									</a>
+								</li>
+								<li class="">
+									<a class="nav-link fa-icon" href="https://github.com/{{ portfolio.github_link }}" target="_blank">
+										<i class="fab fa-github"></i>
+									</a>
+								</li>
+							</ul>		    
+						</nav>
+						<div class="card-text">
+							
+						</div>
+					</div>
+					<div class=" col-md-6 piece-detail">
+						<div class="card-text">
+							{{ portfolio.content|safe }}
+						</div>
+					</div>
+				</div>
+			</article>
+
+		</section>
+
+	</div>
+{% endblock content %}
