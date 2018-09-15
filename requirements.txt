@@ -1,0 +1,17 @@
+beautifulsoup4==4.6.3
+certifi==2018.8.24
+django==2.1.1
+django-blog-zinnia==0.20
+django-ckeditor==5.6.1
+django-contrib-comments==1.9.0
+django-js-asset==1.1.0
+django-mptt==0.9.1
+django-tagging==0.4.6
+django-xmlrpc==0.1.8
+mots-vides==2015.5.11
+pillow==5.2.0
+pyparsing==2.2.0
+pytz==2018.5
+regex==2018.8.29
+wincertstore==0.2
+zinnia-wysiwyg-ckeditor==1.3
