@@ -32,4 +32,3 @@ if settings.DEBUG:
     from django.views.generic.base import RedirectView
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += static(settings.MEDIA_URL + 'uploads/', document_root=os.path.join(settings.MEDIA_ROOT, 'uploads'))
-
