@@ -1,1 +1,1 @@
-web: gunicorn dispatrace.wsgi --log-file -
+web: gunicorn aurthur.wsgi --log-file -
